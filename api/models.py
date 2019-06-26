@@ -8,6 +8,9 @@ class Author(models.Model):
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'
 
+    def __str__(self):
+        return self.name
+
 
 class Book(models.Model):
     name = models.CharField(max_length=255, verbose_name="Название книги")
