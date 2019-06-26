@@ -1,5 +1,6 @@
 from api.models import Author, Book
 
+
 def getbooks(data):
     all_books = Book.objects.all()
 
