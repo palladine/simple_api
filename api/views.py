@@ -22,7 +22,16 @@ class RespInfo(View):
         if not name_method:
             return JsonResponse(self.form_error(711))
 
-        return JsonResponse(self.form_data(getattr(methods, name_method)(data)))
+        try:
+            resp = getattr(methods, name_method)(data)
+        except Exception:
+            return JsonResponse(self.form_error(702))
+
+        # проверка на ошибки в методах
+        if 'code' in resp:
+            return JsonResponse(self.form_error(resp.get('code')))
+
+        return JsonResponse(self.form_data(resp))
 
 
     def form_error(self, code):
