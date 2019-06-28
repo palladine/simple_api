@@ -23,7 +23,7 @@ class RespInfo(View):
             return JsonResponse(self.form_error(711))
 
         try:
-            resp = getattr(methods, name_method)(data)
+            resp, par = getattr(methods, name_method)(data)
         except Exception:
             return JsonResponse(self.form_error(702))
 
@@ -31,11 +31,11 @@ class RespInfo(View):
         if 'code' in resp:
             return JsonResponse(self.form_error(resp.get('code')))
 
-        return JsonResponse(self.form_data(resp))
+        return JsonResponse(self.form_data(resp, par))
 
 
     def form_error(self, code):
         return {'status': 0, 'code': code, 'error': get_error_by_code(code)}
 
-    def form_data(self, data):
-        return {'status': 1, 'data': data}
+    def form_data(self, data, par):
+        return {'status': 1, 'count': par.get('count'), 'data': data}

@@ -2,7 +2,7 @@
 (Python / Django)
 
 ***
-* Запросы к api POST-методом - **/api**
+* Запросы к api POST-методом на  **/api**
 
 ***
 Реализованы три метода:
@@ -24,6 +24,7 @@
 ```json  
 {  
   "status": 1,  
+  "count": 3,
   "data": [  
        {  
          "id": 1,  
@@ -60,6 +61,7 @@
 ```json  
 {
   "status": 1,
+  "count": 2,
   "data": [
        {
          "id": 1,
@@ -90,6 +92,7 @@
 ```json  
 {
   "status": 1,
+  "count": 3,
   "data": [
        {
          "id": 1,

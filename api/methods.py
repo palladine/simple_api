@@ -2,7 +2,10 @@ from api.models import Author, Book
 
 
 def getbooks(data):
+    params =dict()
+
     all_books = Book.objects.all()
+    params.update({'count': all_books.count()})
 
     idlst = [x.pk for x in all_books]
     namelst = [x.name for x in all_books]
@@ -17,11 +20,14 @@ def getbooks(data):
     for element in elements:
         response.append(dict(zip(keys_response, element)))
 
-    return response
+    return response, params
 
 
 def getauthors(data):
+    params=dict()
     all_authors = Author.objects.all()
+
+    params.update({'count': all_authors.count()})
 
     idlst = [x.pk for x in all_authors]
     namelst = [x.name for x in all_authors]
@@ -33,7 +39,7 @@ def getauthors(data):
     for element in elements:
         response.append(dict(zip(keys_response, element)))
 
-    return response
+    return response, params
 
 
 def getbookinfo(data):
@@ -42,7 +48,10 @@ def getbookinfo(data):
     if not id:
         return {'code': 712}
 
+    params =dict()
     filter_books = Book.objects.filter(pk__in=id)
+
+    params.update({'count': filter_books.count()})
 
     idlst = [x.pk for x in filter_books]
     namelst = [x.name for x in filter_books]
@@ -57,5 +66,5 @@ def getbookinfo(data):
     for element in elements:
         response.append(dict(zip(keys_response, element)))
 
-    return response
+    return response, params
 
